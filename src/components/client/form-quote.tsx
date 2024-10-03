@@ -51,9 +51,10 @@ export function FormQuote() {
           name="quote"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Quote</FormLabel>
+              <FormLabel className="text-2xl font-bold">Quote</FormLabel>
               <FormControl>
                 <Textarea
+                  className="resize-y max-h-64"
                   placeholder="Enter the quote you want to share to the world"
                   {...field}
                 />
@@ -62,7 +63,13 @@ export function FormQuote() {
             </FormItem>
           )}
         />
-        <Button type="submit">Share</Button>
+        <Button
+          type="submit"
+          className="w-full"
+          disabled={!form.formState.isValid}
+        >
+          Share
+        </Button>
       </form>
     </Form>
   );
