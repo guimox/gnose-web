@@ -1,1 +1,1 @@
-# gnos
+# Gnose Frontend

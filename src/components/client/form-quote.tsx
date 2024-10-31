@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -11,22 +11,22 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Textarea } from "../ui/textarea";
+} from '@/components/ui/form';
+import { Textarea } from '../ui/textarea';
 
 const FormSchema = z.object({
   quote: z
     .string()
     .trim()
     .min(20, {
-      message: "Quote must be at least 20 characters.",
+      message: 'Quote must be at least 20 characters.',
     })
     .max(150, {
-      message: "Quote cannot exceed 150 characters.",
+      message: 'Quote cannot exceed 150 characters.',
     })
     .regex(/^[a-zA-Z0-9 .,?!'"-]*$/, {
       message:
-        "Quote contains invalid characters. Only letters, numbers, and basic punctuation are allowed.",
+        'Quote contains invalid characters. Only letters, numbers, and basic punctuation are allowed.',
     }),
 });
 
@@ -35,7 +35,7 @@ export function FormQuote() {
     resolver: zodResolver(FormSchema),
 
     defaultValues: {
-      quote: "",
+      quote: '',
     },
   });
 
@@ -51,7 +51,9 @@ export function FormQuote() {
           name="quote"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-2xl font-bold">Quote</FormLabel>
+              <FormLabel className="text-2xl font-bold !text-current">
+                Quote
+              </FormLabel>
               <FormControl>
                 <Textarea
                   className="resize-y max-h-64"
@@ -63,11 +65,7 @@ export function FormQuote() {
             </FormItem>
           )}
         />
-        <Button
-          type="submit"
-          className="w-full"
-          disabled={!form.formState.isValid}
-        >
+        <Button type="submit" className="w-1/2">
           Share
         </Button>
       </form>
