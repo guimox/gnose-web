@@ -1,47 +1,11 @@
-async function getQuotes() {
-  try {
-    const response = await fetch('https://test.gnose.app/api/quotes', {
-      next: {
-        revalidate: 60,
-      },
-    });
+import { FormQuote } from '@/components/client/form-quote';
 
-    if (!response.ok) {
-      throw new Error('Failed to fetch quotes');
-    }
-
-    return response.json();
-  } catch (error) {
-    console.error('Error fetching quotes:', error);
-    return [];
-  }
-}
-
-export default async function QuotesPage() {
-  const quotes = await getQuotes();
-
+export default function Quotes() {
   return (
-    <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold mb-6">Quotes</h1>
-      <div className="grid gap-4">
-        {quotes.map(
-          (quote: {
-            id: number;
-            quote: string;
-            createdAt: string;
-            updatedAt: string;
-          }) => (
-            <div key={quote.id}>
-              <div className="py-4">
-                <p className="text-lg">{quote.quote}</p>
-                <p className="text-sm text-gray-500 mt-2">
-                  Created: {new Date(quote.createdAt).toLocaleDateString()}
-                </p>
-              </div>
-            </div>
-          )
-        )}
-      </div>
+    <div className="flex min-h-screen items-center justify-center font-[family-name:var(--font-geist-sans)]">
+      <main className="row-start-2 mb-10 flex w-full flex-col items-center gap-8 sm:items-start">
+        <FormQuote />
+      </main>{' '}
     </div>
   );
 }
