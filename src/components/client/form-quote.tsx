@@ -56,7 +56,7 @@ export function FormQuote() {
               </FormLabel>
               <FormControl>
                 <Textarea
-                  className="resize-y max-h-64"
+                  className="max-h-64 resize-y"
                   placeholder="Enter the quote you want to share to the world"
                   {...field}
                 />

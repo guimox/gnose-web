@@ -6,7 +6,7 @@ export default function Header() {
           <li className="list-none">
             <a
               href="#quotes"
-              className="text-white text-lg font-semibold hover:text-gray-400"
+              className="text-lg font-semibold text-white hover:text-gray-400"
             >
               Quotes
             </a>
