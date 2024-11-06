@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 import * as React from 'react';
+import { ModalProvider } from '@/context/ModalContext';
+import Header from '@/components/server/header';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -27,9 +29,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} mx-auto max-w-2xl antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} mx-auto w-full antialiased`}
       >
-        {children}
+        <ModalProvider>
+          <Header />
+          <main className="mx-auto max-w-2xl px-4">{children}</main>
+        </ModalProvider>
       </body>
     </html>
   );
