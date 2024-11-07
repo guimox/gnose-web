@@ -1,5 +1,5 @@
-import Header from '@/components/server/header';
 import DialogShare from '@/components/client/dialog-share';
+import VoterQuote from '@/components/client/voter-quote';
 import { Badge } from '@/components/ui/badge';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
@@ -30,9 +30,7 @@ export default async function HomePage() {
           <div key={quote.id}>
             <div className="flex items-center justify-start gap-4 py-6">
               <div className="flex w-fit flex-col items-center justify-start gap-2 rounded-md border p-2">
-                <ChevronUp className="h-3 w-3 cursor-pointer hover:opacity-25" />
-                <p className="text-sm text-gray-500">{quote.votes}</p>
-                <ChevronDown className="h-3 w-3 cursor-pointer hover:opacity-25" />
+                <VoterQuote quoteId={quote.id} initialVotes={quote.votes} />
               </div>
               <div className="flex flex-col justify-between gap-3">
                 <p className="text-lg font-bold md:text-xl">{quote.quote}</p>

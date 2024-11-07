@@ -14,7 +14,7 @@ export default function AboutPage() {
         helps keep the platform clean, relevant, and welcoming for all.
       </p>
       <p className="text-lg text-gray-700">
-        I believe that <em>simplicity always wins</em>. I've crafted a
+        I believe that <em>simplicity always wins</em>. I`ve crafted a
         minimalist experience so that the focus stays where it should — on the
         quotes themselves.
       </p>{' '}

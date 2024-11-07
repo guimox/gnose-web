@@ -1,9 +1,9 @@
+import Header from '@/components/client/header';
+import { ModalProvider } from '@/context/ModalContext';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-import './globals.css';
 import * as React from 'react';
-import { ModalProvider } from '@/context/ModalContext';
-import Header from '@/components/server/header';
+import './globals.css';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
