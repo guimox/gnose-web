@@ -12,26 +12,34 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '../ui/button';
 import { useModal } from '@/context/ModalContext';
+import { FormQuote } from './form-quote';
 
 const DialogShare = () => {
   const { isOpen, closeModal } = useModal();
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && closeModal()}>
-      <DialogContent>
+      <DialogContent className="flex flex-col gap-8">
         <DialogHeader>
-          <DialogTitle>Are you absolutely sure?</DialogTitle>
-          <DialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
-          </DialogDescription>
+          <DialogTitle>Share your quote to the world</DialogTitle>
         </DialogHeader>
-        <DialogFooter className="sm:justify-start">
+        <DialogDescription>
+          <FormQuote />
+        </DialogDescription>
+        <DialogFooter className="space-x-4 sm:justify-end">
           <DialogClose asChild>
-            <Button type="button" variant="secondary" onClick={closeModal}>
+            <Button
+              type="button"
+              variant="secondary"
+              className="w-1/3"
+              onClick={closeModal}
+            >
               Close
             </Button>
           </DialogClose>
+          <Button type="submit" form="form-quote" className="w-1/3">
+            Share
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

@@ -1,3 +1,5 @@
+import { RequestInit } from 'next/dist/server/web/spec-extension/request';
+
 const baseURL = 'https://api.gnose.app';
 const origin = 'https://gnose.app';
 
@@ -6,12 +8,15 @@ interface ApiResponse<T> {
   error: string | null;
 }
 
-const fetchWithBaseUrl = async <T>(path: string, options?: RequestInit): Promise<ApiResponse<T>> => {
+const fetchWithBaseUrl = async <T>(
+  path: string,
+  options?: RequestInit
+): Promise<ApiResponse<T>> => {
   try {
     const response = await fetch(`${baseURL}${path}`, {
       ...options,
       headers: {
-        'Origin': origin,
+        Origin: origin,
         ...(options?.headers || {}),
       },
     });

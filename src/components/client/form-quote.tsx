@@ -1,3 +1,4 @@
+// components/FormQuote.js
 'use client';
 
 import { Button } from '@/components/ui/button';
@@ -33,7 +34,6 @@ const FormSchema = z.object({
 export function FormQuote() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
-
     defaultValues: {
       quote: '',
     },
@@ -45,15 +45,16 @@ export function FormQuote() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6">
+      <form
+        id="form-quote"
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="w-full space-y-6"
+      >
         <FormField
           control={form.control}
           name="quote"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-2xl font-bold !text-current">
-                Quote
-              </FormLabel>
               <FormControl>
                 <Textarea
                   className="max-h-64 resize-y"
@@ -65,9 +66,6 @@ export function FormQuote() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-1/2">
-          Share
-        </Button>
       </form>
     </Form>
   );

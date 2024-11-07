@@ -1,7 +1,6 @@
 import DialogShare from '@/components/client/dialog-share';
 import VoterQuote from '@/components/client/voter-quote';
 import { Badge } from '@/components/ui/badge';
-import { ChevronDown, ChevronUp } from 'lucide-react';
 
 async function getQuotes() {
   try {
