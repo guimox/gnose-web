@@ -1,7 +1,7 @@
 'use client';
+import { Button } from '@/components/ui/button';
 import { useModal } from '@/context/ModalContext';
-import { Button } from '../ui/button';
-import NavLink from './header/navlink';
+import NavLink from './navlink';
 
 export default function Header() {
   const { openModal } = useModal();
