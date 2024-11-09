@@ -1,6 +1,6 @@
 import { RequestInit } from 'next/dist/server/web/spec-extension/request';
 
-const baseURL = 'https://api.gnose.app';
+const baseURL = 'http://api.gnose.app';
 const origin = 'https://gnose.app';
 
 interface ApiResponse<T> {

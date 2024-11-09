@@ -1,15 +1,12 @@
-// components/FormQuote.js
 'use client';
-
-import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import { fetchWithBaseUrl } from '@/utils/api-client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -24,10 +21,6 @@ const FormSchema = z.object({
     })
     .max(150, {
       message: 'Quote cannot exceed 150 characters.',
-    })
-    .regex(/^[a-zA-Z0-9 .,?!'"-]*$/, {
-      message:
-        'Quote contains invalid characters. Only letters, numbers, and basic punctuation are allowed.',
     }),
 });
 
@@ -39,8 +32,39 @@ export function FormQuote() {
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    alert(JSON.stringify(data));
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    try {
+      const postResponse = await fetchWithBaseUrl<{ hashId: string }>(
+        '/quotes/correct',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ quote: data.quote }),
+        }
+      );
+
+      if (postResponse.error) {
+        throw new Error(postResponse.error);
+      }
+
+      const { hashId } = postResponse.data;
+
+      const confirmResponse = await fetchWithBaseUrl(
+        `/quotes?hashId=${hashId}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+
+      if (confirmResponse.error) {
+        throw new Error(confirmResponse.error);
+      }
+
+      form.reset();
+    } catch (error: any) {
+      console.log(error);
+    }
   }
 
   return (
