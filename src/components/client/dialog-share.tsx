@@ -1,16 +1,11 @@
-// components/DialogShare.js
 'use client';
-
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Button } from '../ui/button';
 import { useModal } from '@/context/ModalContext';
 import { FormQuote } from './form-quote';
 
@@ -26,21 +21,6 @@ const DialogShare = () => {
         <DialogDescription>
           <FormQuote />
         </DialogDescription>
-        <DialogFooter className="space-x-4 sm:justify-end">
-          <DialogClose asChild>
-            <Button
-              type="button"
-              variant="secondary"
-              className="w-1/3"
-              onClick={closeModal}
-            >
-              Close
-            </Button>
-          </DialogClose>
-          <Button type="submit" form="form-quote" className="w-1/3">
-            Share
-          </Button>
-        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

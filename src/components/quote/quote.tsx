@@ -18,29 +18,6 @@ interface Quote {
   };
 }
 
-function LanguageBadge({ language }: { language: string }) {
-  let displayText;
-  switch (language) {
-    case 'English':
-      displayText = 'EN';
-      break;
-    case 'Spanish':
-      displayText = 'ES';
-      break;
-    case 'Portuguese':
-      displayText = 'PT';
-      break;
-    default:
-      displayText = 'Unknown';
-  }
-
-  return (
-    <Badge variant="secondary" className="rounded-md bg-gray-100">
-      {displayText}
-    </Badge>
-  );
-}
-
 export default function QuoteCard({ quote }: { quote: Quote }) {
   const [copySuccess, setCopySuccess] = useState(false);
 
@@ -53,7 +30,7 @@ export default function QuoteCard({ quote }: { quote: Quote }) {
 
   return (
     <div key={quote.id}>
-      <div className="flex items-center justify-start gap-4 py-6">
+      <div className="mt-4 flex items-center justify-start gap-4 py-6">
         <div className="flex flex-col justify-between gap-3">
           <p className="text-lg font-bold md:text-xl">{quote.quote}</p>
           <div className="flex items-center justify-start gap-4">
@@ -61,7 +38,7 @@ export default function QuoteCard({ quote }: { quote: Quote }) {
               <Button
                 variant="outline"
                 size="icon"
-                className="h-5 w-5 border-none bg-gray-100 p-1"
+                className="h-6 w-6 border-none bg-primary p-1 text-white"
               >
                 <ClipboardCheck />
               </Button>
@@ -69,13 +46,21 @@ export default function QuoteCard({ quote }: { quote: Quote }) {
               <Button
                 variant="outline"
                 size="icon"
-                className="h-5 w-5 border-none bg-gray-100 p-1"
+                className="h-6 w-6 border-none bg-gray-100 p-1"
               >
                 <Clipboard onClick={handleCopy} />
               </Button>
             )}
-            <LanguageBadge language={quote.language.name} />
-            <Badge variant="outline" className="rounded-md">
+            <Badge
+              variant="secondary"
+              className="cursor-pointer rounded-md bg-gray-100 hover:opacity-50"
+            >
+              {quote.language.name}
+            </Badge>{' '}
+            <Badge
+              variant="outline"
+              className="cursor-pointer rounded-md hover:opacity-50"
+            >
               {quote.category.name}
             </Badge>
           </div>
