@@ -15,7 +15,7 @@ const fetchWithBaseUrl = async <T>(
     const response = await fetch(`${API_URL}${path}`, {
       ...options,
       headers: {
-        Origin: "https://gnose.app",
+        Origin: 'https://gnose.app',
         ...(options?.headers || {}),
       },
     });
