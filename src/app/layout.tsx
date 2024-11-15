@@ -1,19 +1,9 @@
+import { TooltipProvider } from '@/components/ui/tooltip';
 import { ModalProvider } from '@/context/ModalContext';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import * as React from 'react';
 import './globals.css';
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationPrevious,
-  PaginationLink,
-  PaginationEllipsis,
-  PaginationNext,
-} from '@/components/ui/pagination';
-import { useRouter } from 'next/navigation';
-import { TooltipProvider } from '@/components/ui/tooltip';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',

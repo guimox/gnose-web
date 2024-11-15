@@ -37,7 +37,7 @@ export default async function HomePage({
 
   const currentPage = isNaN(pageParam) || pageParam < 1 ? 0 : pageParam - 1;
 
-  const { quotes, totalPages, totalItems } = await getQuotes(currentPage);
+  const { quotes, totalPages } = await getQuotes(currentPage);
 
   if (!quotes.length) {
     notFound();

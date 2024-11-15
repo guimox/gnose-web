@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { diffChars, Change } from 'diff';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -7,20 +6,21 @@ import {
   FormItem,
   FormMessage,
 } from '@/components/ui/form';
-import { useModal } from '@/context/ModalContext';
-import { fetchWithBaseUrl } from '@/utils/api-client';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { useModal } from '@/context/ModalContext';
+import { fetchWithBaseUrl } from '@/utils/api-client';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Change, diffChars } from 'diff';
 import { CircleHelp } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 const FormSchema = z.object({
   quote: z
@@ -70,7 +70,7 @@ const DiffView: React.FC<DiffViewProps> = ({ originalText, correctedText }) => {
   );
 };
 
-export function FormQuote(): JSX.Element {
+export function FormQuote() {
   const router = useRouter();
   const { closeModal } = useModal();
   const [correctedQuote, setCorrectedQuote] = useState<any>(null);
