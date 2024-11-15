@@ -16,6 +16,9 @@ const fetchWithBaseUrl = async <T>(
       ...options,
       headers: {
         Origin: 'https://gnose.app',
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
         ...(options?.headers || {}),
       },
     });
