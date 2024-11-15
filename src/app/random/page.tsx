@@ -1,10 +1,8 @@
-// app/random/page.js
-
 import Header from '@/components/client/header/header';
 import QuoteCard from '@/components/quote/quote';
 
 export default async function RandomPage() {
-  const res = await fetch('http://localhost:8081/quotes/10', {
+  const res = await fetch('https://gnose.app/quotes/10', {
     next: { revalidate: 60 },
   });
 

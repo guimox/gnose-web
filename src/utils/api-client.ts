@@ -1,7 +1,6 @@
 import { RequestInit } from 'next/dist/server/web/spec-extension/request';
 
-const baseURL = 'http://localhost:8081';
-const origin = 'https://gnose.app';
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 interface ApiResponse<T> {
   data: T;
@@ -13,13 +12,14 @@ const fetchWithBaseUrl = async <T>(
   options?: RequestInit
 ): Promise<ApiResponse<T>> => {
   try {
-    const response = await fetch(`${baseURL}${path}`, {
+    const response = await fetch(`${API_URL}${path}`, {
       ...options,
       headers: {
-        Origin: origin,
+        Origin: "https://gnose.app",
         ...(options?.headers || {}),
       },
     });
+
     const data = await response.json();
 
     return {

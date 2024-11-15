@@ -2,29 +2,25 @@ import DialogShare from '@/components/client/dialog-share';
 import Header from '@/components/client/header/header';
 import PaginationPage from '@/components/client/pagination-page';
 import QuoteCard from '@/components/quote/quote';
+import { fetchWithBaseUrl } from '@/utils/api-client';
 import { notFound } from 'next/navigation';
 
 const QUOTES_PER_PAGE = 10;
 
 async function getQuotes(page: number) {
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
-  try {
-    const response = await fetch(
-      `${API_URL}/quotes?page=${page}&size=${QUOTES_PER_PAGE}`,
-      {
-        cache: 'no-store',
-      }
-    );
+  const { data, error } = await fetchWithBaseUrl<{
+    quotes: Array<any>;
+    totalPages: number;
+  }>(`/quotes?page=${page}&size=${QUOTES_PER_PAGE}`, {
+    cache: 'no-store',
+  });
 
-    if (!response.ok) {
-      throw new Error('Failed to fetch quotes');
-    }
-
-    return response.json();
-  } catch (error) {
+  if (error) {
     console.error('Error fetching quotes:', error);
-    return [];
+    return { quotes: [], totalPages: 0 };
   }
+
+  return data || { quotes: [], totalPages: 0 };
 }
 
 export default async function HomePage({
