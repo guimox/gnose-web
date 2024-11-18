@@ -15,7 +15,6 @@ const fetchWithBaseUrl = async <T>(
     const response = await fetch(`${API_URL}${path}`, {
       ...options,
       headers: {
-        Origin: 'https://gnose.app',
         'Content-Type': 'application/json',
         Accept: 'application/json',
         'X-Requested-With': 'XMLHttpRequest',

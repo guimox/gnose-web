@@ -16,7 +16,7 @@ async function getQuotes(page: number) {
   });
 
   if (error) {
-    console.error('Error fetching quotes:', error);
+    console.error('Error fetching quotes in main page:', error);
     return { quotes: [], totalPages: 0 };
   }
 

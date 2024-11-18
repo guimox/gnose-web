@@ -38,7 +38,7 @@ export default function QuoteCard({ quote }: { quote: Quote }) {
               <Button
                 variant="outline"
                 size="icon"
-                className="h-6 w-6 border-none bg-primary p-1 text-white"
+                className="h-6 w-6 border-none bg-gray-100 p-1"
               >
                 <ClipboardCheck />
               </Button>

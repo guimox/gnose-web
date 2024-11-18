@@ -1,4 +1,10 @@
 'use client';
+
+import * as React from 'react';
+import { cn } from '@/lib/utils';
+import { useModal } from '@/context/ModalContext';
+import { FormQuote } from './form-quote';
+
 import {
   Dialog,
   DialogContent,
@@ -6,24 +12,54 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { useModal } from '@/context/ModalContext';
-import { FormQuote } from './form-quote';
 
-const DialogShare = () => {
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+} from '@/components/ui/drawer';
+
+import { Button } from '@/components/ui/button';
+import { useMediaQuery } from '@/hooks/user-media-query';
+
+const ResponsiveDialogShare = () => {
   const { isOpen, closeModal } = useModal();
+  const isDesktop = useMediaQuery('(min-width: 768px)');
+
+  if (isDesktop) {
+    return (
+      <Dialog open={isOpen} onOpenChange={(open) => !open && closeModal()}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Share your quote to the world</DialogTitle>
+          </DialogHeader>
+          <DialogDescription>
+            <FormQuote />
+          </DialogDescription>
+        </DialogContent>
+      </Dialog>
+    );
+  }
 
   return (
-    <Dialog open={isOpen} onOpenChange={(open) => !open && closeModal()}>
-      <DialogContent className="flex flex-col gap-8">
-        <DialogHeader>
-          <DialogTitle>Share your quote to the world</DialogTitle>
-        </DialogHeader>
-        <DialogDescription>
+    <Drawer
+      open={isOpen}
+      onOpenChange={(open: boolean) => !open && closeModal()}
+    >
+      <DrawerContent className="py-10">
+        <DrawerHeader className="text-left">
+          <DrawerTitle>Share your quote to the world</DrawerTitle>
+        </DrawerHeader>
+        <div className="px-4">
           <FormQuote />
-        </DialogDescription>
-      </DialogContent>
-    </Dialog>
+        </div>
+      </DrawerContent>
+    </Drawer>
   );
 };
 
-export default DialogShare;
+export default ResponsiveDialogShare;
