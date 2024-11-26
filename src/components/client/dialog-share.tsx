@@ -1,7 +1,5 @@
 'use client';
 
-import * as React from 'react';
-import { cn } from '@/lib/utils';
 import { useModal } from '@/context/ModalContext';
 import { FormQuote } from './form-quote';
 
@@ -15,15 +13,11 @@ import {
 
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
 } from '@/components/ui/drawer';
 
-import { Button } from '@/components/ui/button';
 import { useMediaQuery } from '@/hooks/user-media-query';
 
 const ResponsiveDialogShare = () => {
