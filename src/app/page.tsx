@@ -1,10 +1,12 @@
 import DialogShare from '@/components/client/dialog-share';
 import Header from '@/components/client/header/header';
 import PaginationPage from '@/components/client/pagination-page';
+import InfiniteScrollQuotes from '@/components/InfiniteScrollQuotes';
 import QuoteCard from '@/components/quote/quote';
 import { fetchWithBaseUrl } from '@/utils/api-client';
+import { notFound } from 'next/navigation';
 
-const QUOTES_PER_PAGE = 10;
+const QUOTES_PER_PAGE = 8;
 
 async function getQuotes(page: number) {
   const { data, error } = await fetchWithBaseUrl<{
@@ -30,22 +32,20 @@ export default async function HomePage({
   const pageParam =
     searchParams && searchParams.page ? parseInt(searchParams.page) : 0;
 
-  const currentPage = pageParam ?? 0;
+  const currentPage = isNaN(pageParam) || pageParam < 1 ? 0 : pageParam - 1;
 
-  const { quotes, totalPages } = await getQuotes(0);
+  const { quotes, totalPages } = await getQuotes(currentPage);
 
-  console.log('quotes', quotes);
+  if (!quotes.length) {
+    notFound();
+  }
 
   return (
     <>
       <Header />
-      <div className="mb-20 grid gap-2 divide-y divide-solid">
-        {quotes.map((quote: any, index: number) => (
-          <QuoteCard quote={quote} key={index} />
-        ))}
-      </div>
+      <InfiniteScrollQuotes initialQuotes={quotes} />
+
       <DialogShare />
-      <PaginationPage currentPage={currentPage} totalPages={totalPages} />
     </>
   );
 }
