@@ -30,13 +30,11 @@ export default async function HomePage({
   const pageParam =
     searchParams && searchParams.page ? parseInt(searchParams.page) : 0;
 
-  const currentPage = isNaN(pageParam) || pageParam < 1 ? 0 : pageParam - 1;
+  const currentPage = pageParam ?? 0;
 
-  const { quotes, totalPages } = await getQuotes(currentPage);
+  const { quotes, totalPages } = await getQuotes(0);
 
-  if (!quotes.length) {
-    ('no quotes');
-  }
+  console.log('quotes', quotes);
 
   return (
     <>
