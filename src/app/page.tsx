@@ -3,7 +3,6 @@ import Header from '@/components/client/header/header';
 import PaginationPage from '@/components/client/pagination-page';
 import QuoteCard from '@/components/quote/quote';
 import { fetchWithBaseUrl } from '@/utils/api-client';
-import { notFound } from 'next/navigation';
 
 const QUOTES_PER_PAGE = 10;
 
@@ -36,7 +35,7 @@ export default async function HomePage({
   const { quotes, totalPages } = await getQuotes(currentPage);
 
   if (!quotes.length) {
-    notFound();
+    ('no quotes');
   }
 
   return (
