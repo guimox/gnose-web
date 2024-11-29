@@ -1,20 +1,18 @@
 import DialogShare from '@/components/client/dialog-share';
 import Header from '@/components/client/header/header';
-import PaginationPage from '@/components/client/pagination-page';
-import InfiniteScrollQuotes from '@/components/InfiniteScrollQuotes';
-import QuoteCard from '@/components/quote/quote';
+import InfiniteScrollQuotes from '@/components/infinite-scroll';
 import { fetchWithBaseUrl } from '@/utils/api-client';
-import { notFound } from 'next/navigation';
 
 const QUOTES_PER_PAGE = 8;
+
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 async function getQuotes(page: number) {
   const { data, error } = await fetchWithBaseUrl<{
     quotes: Array<any>;
     totalPages: number;
-  }>(`/quotes?page=${page}&size=${QUOTES_PER_PAGE}`, {
-    cache: 'no-store',
-  });
+  }>(`/quotes?page=${page}&size=${QUOTES_PER_PAGE}`);
 
   if (error) {
     console.error('Error fetching quotes in main page:', error);
@@ -24,27 +22,13 @@ async function getQuotes(page: number) {
   return data || { quotes: [], totalPages: 0 };
 }
 
-export default async function HomePage({
-  searchParams,
-}: {
-  searchParams?: { [key: string]: string | undefined };
-}) {
-  const pageParam =
-    searchParams && searchParams.page ? parseInt(searchParams.page) : 0;
-
-  const currentPage = isNaN(pageParam) || pageParam < 1 ? 0 : pageParam - 1;
-
-  const { quotes, totalPages } = await getQuotes(currentPage);
-
-  if (!quotes.length) {
-    notFound();
-  }
+export default async function HomePage() {
+  const quotes = await getQuotes(0);
 
   return (
     <>
       <Header />
-      <InfiniteScrollQuotes initialQuotes={quotes} />
-
+      <InfiniteScrollQuotes initialQuotes={quotes.quotes} />
       <DialogShare />
     </>
   );

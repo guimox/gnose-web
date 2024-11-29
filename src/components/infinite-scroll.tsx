@@ -1,14 +1,13 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
 import QuoteCard from '@/components/quote/quote';
 import { fetchWithBaseUrl } from '@/utils/api-client';
+import { useCallback, useEffect, useState } from 'react';
 
-const QUOTES_PER_PAGE = 5;
+const QUOTES_PER_PAGE = 8;
 
 interface Quote {
   id: string;
-  // Add other quote properties
 }
 
 export default function InfiniteScrollQuotes({
@@ -29,15 +28,12 @@ export default function InfiniteScrollQuotes({
       const { data } = await fetchWithBaseUrl<{
         quotes: Quote[];
         totalPages: number;
-      }>(`/quotes?page=${page}&size=${QUOTES_PER_PAGE}`, {
-        cache: 'no-store',
-      });
+      }>(`/quotes?page=${page}&size=${QUOTES_PER_PAGE}`);
 
       if (data?.quotes?.length) {
         setQuotes((prevQuotes) => [...prevQuotes, ...data.quotes]);
         setPage((prevPage) => prevPage + 1);
 
-        // Check if we've reached the last page
         if (data.quotes.length < QUOTES_PER_PAGE) {
           setHasMore(false);
         }
@@ -69,15 +65,15 @@ export default function InfiniteScrollQuotes({
   return (
     <>
       <div className="mb-20 grid gap-2 divide-y divide-solid">
-        {quotes.map((quote: any, index) => (
-          <QuoteCard quote={quote} key={`${quote.id}-${index}`} />
+        {quotes.map((quote: any) => (
+          <QuoteCard quote={quote} key={quote.id} />
         ))}
       </div>
       {isLoading && (
         <div className="py-4 text-center">Loading more quotes...</div>
       )}
       {!hasMore && (
-        <div className="py-4 text-center text-gray-500">
+        <div className="py-4 text-center text-gray-500 sm:py-8">
           No more quotes to load
         </div>
       )}
