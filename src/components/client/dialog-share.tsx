@@ -1,7 +1,7 @@
 'use client';
 
 import { useModal } from '@/context/ModalContext';
-import { FormQuote } from './form-quote';
+import { FormQuote } from '../server/form-quote';
 
 import {
   Dialog,

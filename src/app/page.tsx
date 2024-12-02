@@ -1,6 +1,8 @@
 import DialogShare from '@/components/client/dialog-share';
 import Header from '@/components/client/header/header';
 import InfiniteScrollQuotes from '@/components/infinite-scroll';
+import SearchQuote from '@/components/server/search-quote';
+import SelectTag from '@/components/server/select-tag';
 import { fetchWithBaseUrl } from '@/utils/api-client';
 
 const QUOTES_PER_PAGE = 8;
@@ -28,6 +30,7 @@ export default async function HomePage() {
   return (
     <>
       <Header />
+      <SelectTag />
       <InfiniteScrollQuotes initialQuotes={quotes.quotes} />
       <DialogShare />
     </>

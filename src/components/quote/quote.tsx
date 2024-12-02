@@ -1,8 +1,9 @@
 'use client';
 import { Clipboard, ClipboardCheck } from 'lucide-react';
 import { useState } from 'react';
-import { Badge } from '../ui/badge';
+import { Badge, badgeVariants } from '../ui/badge';
 import { Button } from '../ui/button';
+import Link from 'next/link';
 
 interface Quote {
   key: number;
@@ -51,12 +52,15 @@ export default function QuoteCard({ quote }: { quote: Quote }) {
                 <Clipboard onClick={handleCopy} />
               </Button>
             )}
-            <Badge
-              variant="secondary"
-              className="cursor-pointer rounded-md bg-gray-100 hover:opacity-50"
+            <Link
+              href={'?lang=en'}
+              className={
+                badgeVariants({ variant: 'secondary' }) +
+                ' rounded-md !bg-gray-100'
+              }
             >
               {quote.language.name}
-            </Badge>{' '}
+            </Link>
             <Badge
               variant="outline"
               className="cursor-pointer rounded-md hover:opacity-50"
