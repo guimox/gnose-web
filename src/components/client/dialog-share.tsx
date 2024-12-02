@@ -27,7 +27,7 @@ const ResponsiveDialogShare = () => {
   if (isDesktop) {
     return (
       <Dialog open={isOpen} onOpenChange={(open) => !open && closeModal()}>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[625px]">
           <DialogHeader>
             <DialogTitle>Share your quote to the world</DialogTitle>
           </DialogHeader>

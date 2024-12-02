@@ -65,7 +65,7 @@ export default function QuoteCard({ quote }: { quote: Quote }) {
             </Badge>
           </div>
           <p className="text-sm font-light text-gray-400">
-            {new Date(quote.createdAt).toLocaleDateString()}
+            {new Date(quote.createdAt).toLocaleDateString('en-GB')}
           </p>
         </div>
       </div>

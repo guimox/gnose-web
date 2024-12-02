@@ -3,7 +3,7 @@ import QuoteCard from '@/components/quote/quote';
 import { fetchWithBaseUrl } from '@/utils/api-client';
 
 async function getQuote() {
-  const response = await fetchWithBaseUrl<any>('/quotes/10');
+  const response = await fetchWithBaseUrl<any>('/quotes/random');
 
   if (response.error) {
     console.error('Error fetching quote:', response.error);
@@ -20,8 +20,8 @@ export default async function RandomPage() {
     return (
       <main className="min-h-screen">
         <Header />
-        <div className="container mx-auto px-4 py-8">
-          <div className="rounded-lg border border-red-200 bg-red-50 p-4">
+        <div className="mx-auto">
+          <div className="my-10 rounded-lg border border-red-200 bg-red-50 p-4">
             <p className="text-red-700">
               Error loading quote. Please try again later.
             </p>
@@ -34,9 +34,7 @@ export default async function RandomPage() {
   return (
     <main className="min-h-screen">
       <Header />
-      <div className="container mx-auto px-4 py-8">
-        <QuoteCard quote={quoteData} />
-      </div>
+      <QuoteCard quote={quoteData} />
     </main>
   );
 }

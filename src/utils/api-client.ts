@@ -1,11 +1,11 @@
 import { RequestInit } from 'next/dist/server/web/spec-extension/request';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
 interface ApiResponse<T> {
   data: T;
   error: string | null;
 }
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const fetchWithBaseUrl = async <T>(
   path: string,
