@@ -5,7 +5,13 @@ import QuoteCard from '@/components/quote/quote';
 import { fetchWithBaseUrl } from '@/utils/api-client';
 
 async function getQuote() {
-  const response = await fetchWithBaseUrl<any>('/quotes/random');
+  const response = await fetchWithBaseUrl<any>('/quotes/random', {
+    cache: 'no-store',
+    headers: {
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      Pragma: 'no-cache',
+    },
+  });
 
   if (response.error) {
     console.error('Error fetching quote:', response.error);
